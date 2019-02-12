@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let updateVisualInterval = setInterval(()=>{
         updateVisual(barLineElem1);
         }, 20);
-    setUpVideoStream();
+    // setUpVideoStream();
 });
 
 function updateVisual(barLineElem) {

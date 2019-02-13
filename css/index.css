@@ -44,3 +44,16 @@ body{
     opacity:0.3;
     z-index: 10000;
 }
+#title{
+    color: white;
+    font-size: 2em;
+    font-family: 'Share Tech Mono', monospace;
+}
+#volumeLevel{
+    display: flex;
+    width: 90%;
+    justify-content: flex-end;
+    color: white;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1.5em;
+}

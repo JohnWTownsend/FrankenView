@@ -8,7 +8,6 @@ var barLineElem;
 
 document.addEventListener("DOMContentLoaded", () => {
     barLineElem1 = document.querySelector("#barLine1");
-
     navigator.mediaDevices.getUserMedia(constraints)
         .then((mediaStream) => {
             setUpMediaStream(mediaStream);
@@ -18,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     let updateVisualInterval = setInterval(()=>{
         updateVisual(barLineElem1);
+        updateVolumeLevelText()
         }, 20);
     // setUpVideoStream();
 });
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function updateVisual(barLineElem) {
     let barElem = document.createElement("div");
     barElem.setAttribute("class", "bar");
-    barElem.setAttribute("style", `height:${currentVolume}%; border:1px solid ${randomColor()};`);
+    barElem.setAttribute("style", `height:${Math.round(currentVolume)}%; border:1px solid ${randomColor()};`);
     barLineElem.appendChild(barElem);
     let numOfBars = 50
     let barElems = barLineElem.querySelectorAll(".bar");
@@ -36,10 +36,15 @@ function updateVisual(barLineElem) {
         });
     }
 
-    if (currentVolume >= 40) {
+    if (Math.round(currentVolume) >= 40) {
         lightning();
     }
 }
+function updateVolumeLevelText(){
+    let volumeLevelText = document.querySelector("#volumeLevel");
+    volumeLevelText.innerHTML = currentVolume.toFixed(3) + "%";
+}
+
 
 function randomColor(){
     r = Math.floor(Math.random()*255);
@@ -81,7 +86,7 @@ function setUpMediaStream(mediaStream) {
 
         var average = values / length;
 
-        currentVolume = Math.round(average)
+        currentVolume = average
     };
 }
 function setUpVideoStream() {

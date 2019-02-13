@@ -3,12 +3,23 @@
 
 <head>
     <meta charset="utf-8" />
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="./js/lib/jquery.lettering-0.6.1.min.js"></script>
+    <script src="./js/lib/textillate.js"></script>
     <script src="./js/index.js"></script>
     <script src="./js/getSrc.js"></script>
+    <script src="./js/animation.js" defer></script>
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link href="./css/index.css" rel="stylesheet">
 </head>
 
 <body>
+    
+    <div class="tlt" id="title" data-in-effect="flash" data-out-effect="flash">FrankenView</div>
+    <i class="fa fa-battery-three-quarters"></i>
+    <div id="volumeLevel" data-in-effect="flash" data-out-effect="flash"></div>
     <div class="barline" id="barLine1">
         <div class="bar"></div>
     </div>

@@ -4,10 +4,16 @@ var constraints = {
 
 var currentVolume = 0;
 var barLineElem;
-
+let volumeLevelText;
+let positionText;
+let positionX = 0;
+let positionY = 0;
+let positionZ = 100;
 
 document.addEventListener("DOMContentLoaded", () => {
     barLineElem1 = document.querySelector("#barLine1");
+    positionText = document.querySelector("#position");
+    volumeLevelText = document.querySelector("#volumeLevel");
     navigator.mediaDevices.getUserMedia(constraints)
         .then((mediaStream) => {
             setUpMediaStream(mediaStream);
@@ -18,14 +24,18 @@ document.addEventListener("DOMContentLoaded", () => {
     let updateVisualInterval = setInterval(()=>{
         updateVisual(barLineElem1);
         updateVolumeLevelText()
+        
         }, 20);
+    setInterval(updatePositionText,250);
     // setUpVideoStream();
 });
+
+
 
 function updateVisual(barLineElem) {
     let barElem = document.createElement("div");
     barElem.setAttribute("class", "bar");
-    barElem.setAttribute("style", `height:${Math.round(currentVolume)}%; border:1px solid ${randomColor()};`);
+    barElem.setAttribute("style", `height:${Math.round(currentVolume)}%; `);//border:1px solid ${randomColor()};
     barLineElem.appendChild(barElem);
     let numOfBars = 50
     let barElems = barLineElem.querySelectorAll(".bar");
@@ -41,10 +51,30 @@ function updateVisual(barLineElem) {
     }
 }
 function updateVolumeLevelText(){
-    let volumeLevelText = document.querySelector("#volumeLevel");
     volumeLevelText.innerHTML = currentVolume.toFixed(3) + "%";
 }
 
+function updatePositionText(){
+    let r1 = Math.floor(Math.random()*100000)%100+1;
+    let r2 = Math.floor(Math.random()*100000)%100+1;
+    positionText.innerHTML = `x:${positionX} y:${positionY} z: ${positionZ}`;
+    if(r1%3 === 0)
+        positionX += 1
+    else if(r1%3 === 1)
+        positionX -= 1
+
+    if(r2%3 === 0)
+        positionY += 1
+    else if(r2%3 === 1)
+        positionY -= 1
+
+    if(r2%10 === 0){
+        if(r1%2 === 0)
+            positionZ += 1
+        else
+            positionZ -= 1
+    }
+}
 
 function randomColor(){
     r = Math.floor(Math.random()*255);

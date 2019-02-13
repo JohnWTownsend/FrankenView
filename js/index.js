@@ -9,12 +9,15 @@ let positionText;
 let positionX = 0;
 let positionY = 0;
 let positionZ = 100;
+let recordDot;
+let blip = true;
 
 document.addEventListener("DOMContentLoaded", () => {
     barLineElem1 = document.querySelector("#barLine1");
     positionText = document.querySelector("#position");
     volumeLevelText = document.querySelector("#volumeLevel");
     overlay = document.querySelector("#overlay");
+    recordDot = document.querySelector("#recordDot");
     navigator.mediaDevices.getUserMedia(constraints)
         .then((mediaStream) => {
             setUpMediaStream(mediaStream);
@@ -29,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         }, 20);
     setInterval(updatePositionText,250);
+    setInterval(bliprecordDot,2000);
     // setUpVideoStream();
 });
 
@@ -48,9 +52,9 @@ function updateBarVisual(barLineElem) {
         });
     }
 
-    if (Math.round(currentVolume) >= 40) {
-        lightning();
-    }
+    // if (Math.round(currentVolume) >= 40) {
+    //     lightning();
+    // }
 }
 function updateVolumeLevelText(){
     volumeLevelText.innerHTML = currentVolume.toFixed(3) + "%";
@@ -83,6 +87,17 @@ function updateOverlayColor(){
     overlay.setAttribute("style",bgColor);
 }
 
+function bliprecordDot(){
+    if(blip){
+        recordDot.setAttribute("style","visibility:hidden;");
+        blip = false;
+    }
+    else{
+        recordDot.setAttribute("style","visibility:visible;");
+        blip = true;
+    }
+}
+
 function randomColor(){
     r = Math.floor(Math.random()*255);
     g = Math.floor(Math.random()*255);
@@ -90,15 +105,6 @@ function randomColor(){
     return `rgb(${r},${g},${b})`;
 }
 
-function lightning() {
-    for (var i = 0; i < 100; i++) {
-        let x = Math.floor(Math.random() * 1000 % 10 + 1);
-        barLineElem.setAttribute("style", `background:yellow`);
-        setTimeout(() => {
-            barLineElem.setAttribute("style", `background:black`);
-        }, x * 300);
-    }
-}
 function setUpMediaStream(mediaStream) {
     let audioContext = new AudioContext();
     let analyzer = audioContext.createAnalyser();

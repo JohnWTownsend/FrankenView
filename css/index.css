@@ -26,7 +26,7 @@ body{
     height: 1%;
     background: #7f7f7f;
     border: 1px solid black;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 #overlay{
     position: absolute;
@@ -40,20 +40,20 @@ body{
 
 #container{
     position:fixed;
-    top:5vh;
-    left:5vw;
-    width:90vw;
-    height:90vh;
+    width:100vw;
+    height:100vh;
     z-index:10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 #container img{
     opacity:0.3;
     z-index: 10000;
+    object-fit: contain;
+    object-position: center;
+    width: 100%;
+    height: 100%;
 }
+
 #title{
     color: white;
     margin-top: 2.5%;
@@ -86,4 +86,16 @@ i{
 
 #volumeLevel{
     padding-top: 5px;
+}
+#batteryAndRecord{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#recordDot{
+    background: red;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
 }

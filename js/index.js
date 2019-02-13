@@ -1,9 +1,9 @@
 var constraints = {
     audio: true,
 }
-
-var currentVolume = 0;
-var barLineElem;
+let overlay;
+let currentVolume = 0;
+let barLineElem;
 let volumeLevelText;
 let positionText;
 let positionX = 0;
@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     barLineElem1 = document.querySelector("#barLine1");
     positionText = document.querySelector("#position");
     volumeLevelText = document.querySelector("#volumeLevel");
+    overlay = document.querySelector("#overlay");
     navigator.mediaDevices.getUserMedia(constraints)
         .then((mediaStream) => {
             setUpMediaStream(mediaStream);
@@ -22,8 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
             console.log(err.name + ": " + err.message);
         });
     let updateVisualInterval = setInterval(()=>{
-        updateVisual(barLineElem1);
-        updateVolumeLevelText()
+        updateBarVisual(barLineElem1);
+        updateVolumeLevelText();
+        updateOverlayColor();
         
         }, 20);
     setInterval(updatePositionText,250);
@@ -32,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-function updateVisual(barLineElem) {
+function updateBarVisual(barLineElem) {
     let barElem = document.createElement("div");
     barElem.setAttribute("class", "bar");
     barElem.setAttribute("style", `height:${Math.round(currentVolume)}%; `);//border:1px solid ${randomColor()};
@@ -74,6 +76,11 @@ function updatePositionText(){
         else
             positionZ -= 1
     }
+}
+
+function updateOverlayColor(){
+    let bgColor = `background-color:rgba(${Math.round(currentVolume)*5},0,0,0.5)`;
+    overlay.setAttribute("style",bgColor);
 }
 
 function randomColor(){

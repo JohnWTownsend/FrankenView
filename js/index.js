@@ -83,7 +83,7 @@ function updatePositionText(){
 }
 
 function updateOverlayColor(){
-    let bgColor = `background-color:rgba(${Math.round(currentVolume)*5},0,0,0.5)`;
+    let bgColor = `background-color:rgba(${Math.round(currentVolume)*5},0,0,0.2)`;
     overlay.setAttribute("style",bgColor);
 }
 
@@ -145,3 +145,4 @@ function setUpVideoStream() {
             });
     }
 }
+/* what is the purpose of this shot honestly though. I don't  like acting like I don't have anything to do, I just like to code, all day long,  */

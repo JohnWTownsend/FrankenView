@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 20);
     setInterval(updatePositionText,250);
     setInterval(bliprecordDot,2000);
-    // setUpVideoStream();
+    setUpVideoStream();
 });
 
 
@@ -83,7 +83,7 @@ function updatePositionText(){
 }
 
 function updateOverlayColor(){
-    let bgColor = `background-color:rgba(${Math.round(currentVolume)*5},0,0,0.2)`;
+    let bgColor = `background-color:rgba(${Math.round(currentVolume)*10},0,0,0.2)`;
     overlay.setAttribute("style",bgColor);
 }
 
@@ -133,7 +133,7 @@ function setUpMediaStream(mediaStream) {
     };
 }
 function setUpVideoStream() {
-    var video = document.querySelector("#videoElement");
+    var video = document.querySelector("#video-stream");
 
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
